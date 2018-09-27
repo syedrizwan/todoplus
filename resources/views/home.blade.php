@@ -13,12 +13,7 @@
             </div>
             <div class=" pull-right">
                 <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#create_task_modal">Create new task</button>
-                {{--<a href="#" class="btn btn-primary btn-block">Create new task</a>--}}
-                {{--
-                                <div class="input-group">
-                                    <div class="input-group-addon"><span class="fa fa-search"></span></div>
-                                    <input type="text" class="form-control" placeholder="Search in tasks..."/>
-                                </div>--}}
+
             </div>
         </div>
         <div class="content-frame-left">
