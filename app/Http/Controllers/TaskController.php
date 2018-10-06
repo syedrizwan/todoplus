@@ -8,29 +8,29 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-	public function setComplete($taskID, $urlSlug) {
+	public function setComplete($taskID) {
 		$task = Task::find($taskID);
 		$task->completed = true;
 
 		if ($task->save()) {
 			session()->flash('status', 'Task has been marked as completed.');
-			return redirect()->route('home', $urlSlug);
+			return redirect()->back();
 		}
 		else {
-			return redirect()->route('home', $urlSlug)->withErrors('Cannot change the status. Please try again.');
+			return redirect()->back()->withErrors('Cannot change the status. Please try again.');
 		}
 	}
 
-	public function setIncomplete($taskID, $urlSlug) {
+	public function setIncomplete($taskID) {
 		$task = Task::find($taskID);
 		$task->completed = false;
 
 		if ($task->save()) {
 			session()->flash('status', 'Task has been re-added to to-do list.');
-			return redirect()->route('home', $urlSlug);
+			return redirect()->back();
 		}
 		else {
-			return redirect()->route('home', $urlSlug)->withErrors('Cannot change the status. Please try again.');
+			return redirect()->back()->withErrors('Cannot change the status. Please try again.');
 		}
 	}
 
@@ -61,6 +61,45 @@ class TaskController extends Controller
 		}
 		else {
 			return redirect()->back()->withErrors('Cannot save the task. Please try again.');
+		}
+	}
+
+	public function archive($taskID) {
+		$task = Task::find($taskID);
+		$task->archived = true;
+
+		if ($task->save()) {
+			session()->flash('status', 'Task has been archived.');
+			return redirect()->back();
+		}
+		else {
+			return redirect()->back()->withErrors('Cannot archive. Please try again.');
+		}
+	}
+
+	public function restore($taskID) {
+		$task = Task::find($taskID);
+		$task->archived = false;
+
+		if ($task->save()) {
+			session()->flash('status', 'Task has been restored.');
+			return redirect()->back();
+		}
+		else {
+			return redirect()->back()->withErrors('Cannot restore. Please try again.');
+		}
+	}
+
+	public function delete($taskID) {
+		$task = Task::find($taskID);
+		$task->deleted = true;
+
+		if ($task->save()) {
+			session()->flash('status', 'Task has been deleted.');
+			return redirect()->back();
+		}
+		else {
+			return redirect()->back()->withErrors('Cannot delete. Please try again.');
 		}
 	}
 }

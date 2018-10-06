@@ -72,7 +72,8 @@
                                             <span class="fa fa-clock-o"></span> {{ $task->created_at->diffForHumans() }}
                                         </div>
                                         <div class="pull-right">
-                                            <a href="{{ route('markComplete', [$task->id, $urlSlug]) }}"><span class="fa fa-check"></span></a>
+                                            <a href="{{ route('markComplete', $task->id) }}"><span class="fa fa-check"></span></a>
+                                            <a href="{{ route('task.delete', $task->id) }}"><span class="fa fa-trash-o"></span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +102,8 @@
                                     <div class="task-footer">
                                         <div class="pull-left"><span class="fa fa-clock-o"></span> Completed: {{ $task->updated_at->diffForHumans() }}</div>
                                         <div class="pull-right">
-                                            <a href="{{ route('markIncomplete', [$task->id, $urlSlug]) }}"><span class="fa fa-plus"></span></a>
+                                            <a href="{{ route('markIncomplete', $task->id) }}"><span class="fa fa-plus"></span></a>
+                                            <a href="{{ route('task.archive', $task->id) }}"><span class="fa fa-archive"></span></a>
                                         </div>
                                     </div>
                                 </div>

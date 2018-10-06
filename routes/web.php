@@ -22,8 +22,12 @@ Auth::routes();
 
 Route::get('/home/{groupSlug?}', 'HomeController@index')->name('home');
 
-Route::get('/task/setcomplete/{taskID}/{urlSlug}', 'TaskController@setComplete')->name('markComplete');
-Route::get('/task/setinomplete/{taskID}/{urlSlug}', 'TaskController@setIncomplete')->name('markIncomplete');
+Route::get('/task/setcomplete/{taskID}', 'TaskController@setComplete')->name('markComplete');
+Route::get('/task/setinomplete/{taskID}', 'TaskController@setIncomplete')->name('markIncomplete');
 
 Route::post('/group/create', 'GroupController@create')->name('group.create');
 Route::post('/task/create/{groupSlug}', 'TaskController@create')->name('task.create');
+
+Route::get('/task/archive/{taskID}', 'TaskController@archive')->name('task.archive');
+Route::get('/task/restore/{taskID}', 'TaskController@restore')->name('task.restore');
+Route::get('/task/delete/{taskID}', 'TaskController@delete')->name('task.delete');

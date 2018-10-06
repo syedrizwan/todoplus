@@ -30,8 +30,20 @@ class HomeController extends Controller
     	$pageData = [
     		'title' => 'Tasks',
 			'groups' => auth()->user()->groups,
-			'incompleteTasks' => $currentGroup->tasks()->orderBy('priority', 'desc')->orderBy('created_at', 'desc')->where('completed', 0)->get(),
-			'completeTasks' => $currentGroup->tasks()->orderBy('priority', 'desc')->orderBy('updated_at', 'desc')->where('completed', 1)->get(),
+			'incompleteTasks' => $currentGroup->tasks()
+											  ->orderBy('priority', 'desc')
+											  ->orderBy('created_at', 'desc')
+											  ->where('completed', 0)
+											  ->where('archived', 0)
+											  ->where('deleted', 0)
+											  ->get(),
+			'completeTasks' => $currentGroup->tasks()
+											->orderBy('priority', 'desc')
+											->orderBy('updated_at', 'desc')
+											->where('completed', 1)
+											->where('archived', 0)
+											->where('deleted', 0)
+											->get(),
 			'urlSlug' => $groupSlug,
 			'currentGroup' => $currentGroup,
 			'priorities' =>$priorities,
